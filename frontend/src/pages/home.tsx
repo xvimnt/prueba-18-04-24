@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import { Topbar } from "../components/topbar";
 import { Card } from "../components/ui/card";
 
@@ -6,6 +7,7 @@ const news = [
     title: "Noticia 1",
     description: "Descripcion 1",
     image: "https://via.placeholder.com/150",
+    onView: () => {},
   },
   {
     title: "Noticia 2",
@@ -30,6 +32,7 @@ const news = [
 ];
 
 export const Home = () => {
+  const navigate = useNavigate();
   return (
     <>
       <Topbar />
@@ -39,7 +42,12 @@ export const Home = () => {
         </span>
         <div className="flex flex-row gap-2">
           {news.map((n) => (
-            <Card title={n.title} description={n.description} image={n.image} />
+            <Card
+              title={n.title}
+              description={n.description}
+              image={n.image}
+              onView={() => navigate("/details")}
+            />
           ))}
         </div>
       </div>
