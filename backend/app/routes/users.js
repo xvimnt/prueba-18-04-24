@@ -7,6 +7,7 @@ const {
   updateItem,
   deleteItem,
 } = require("../controllers/users");
+const checkAuth = require("../middleware/auth");
 
 const User = require("../models/users");
 
@@ -14,7 +15,7 @@ router.get("/", getItems);
 
 router.get("/:id", getItem);
 
-router.post("/", createItem);
+router.post("/", checkAuth, createItem);
 
 router.patch("/:id", updateItem);
 

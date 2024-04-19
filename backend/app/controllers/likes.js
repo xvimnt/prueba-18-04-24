@@ -1,9 +1,9 @@
 const httpError = require("../helpers/handleError");
-const userModel = require("../models/users");
+const likeModel = require("../models/likes");
 
 const getItems = async (req, res) => {
   try {
-    const response = await userModel.find();
+    const response = await likeModel.find();
     res.send(response);
   } catch (error) {
     httpError(res, error);
@@ -13,7 +13,7 @@ const getItems = async (req, res) => {
 const getItem = async (req, res) => {
   try {
     const { id } = req.params;
-    const response = await userModel.findById(id);
+    const response = await likeModel.findById(id);
     res.send(response);
   } catch (error) {
     httpError(res, error);
@@ -22,8 +22,8 @@ const getItem = async (req, res) => {
 
 const createItem = async (req, res) => {
   try {
-    const { name, email, password } = req.body;
-    const response = await userModel.create({ name, email, password });
+    const { user_id, post_id } = req.body;
+    const response = await likeModel.create({ user_id, post_id });
     res.send(response);
   } catch (error) {
     httpError(res, error);
@@ -33,11 +33,11 @@ const createItem = async (req, res) => {
 const updateItem = async (req, res) => {
   try {
     const { id } = req.params;
-    const { name, email, password } = req.body;
-    const response = await userModel.updateOne(
-      { _id: id },
-      { name, email, password }
-    );
+    const { user_id, post_id } = req.body;
+    const response = await likeModel.findByIdAndUpdate(id, {
+      user_id,
+      post_id,
+    });
     res.send(response);
   } catch (error) {
     httpError(res, error);
@@ -47,7 +47,7 @@ const updateItem = async (req, res) => {
 const deleteItem = async (req, res) => {
   try {
     const { id } = req.params;
-    const response = await userModel.findByIdAndDelete(id);
+    const response = await likeModel.findByIdAndDelete(id);
     res.send(response);
   } catch (error) {
     httpError(res, error);
