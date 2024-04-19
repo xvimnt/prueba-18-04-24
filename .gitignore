@@ -14,7 +14,9 @@ logs/
 # Ignore package-lock.json for Node.js backend
 backend/package-lock.json
 backend/node_modules/
+backend/.env
 
 # Ignore yarn.lock for Vite React project
 frontend/yarn.lock
 frontend/node_modules/
+frontend/.env
