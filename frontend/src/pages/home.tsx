@@ -6,7 +6,8 @@ import { useState, useEffect } from "react";
 
 const getNews = async () => {
   try {
-    const jwt = localStorage.getItem("jwt");
+    const jwt = localStorage.getItem("jwt")?.toString();
+    console.log(jwt);
     const response = await axios.get(`${import.meta.env.VITE_API_URL}/posts`, {
       headers: {
         Authorization: `Bearer ${jwt}`,

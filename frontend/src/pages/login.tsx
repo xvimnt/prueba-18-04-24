@@ -35,7 +35,7 @@ export const Login = () => {
     const data = { email, password };
     const jwt = await login(data);
     if (jwt) {
-      localStorage.setItem("jwt", jwt);
+      localStorage.setItem("jwt", jwt.token);
       window.location.href = "/home";
     }
   };

@@ -16,11 +16,11 @@ export const Card = ({
   onShare,
 }: PropsI) => {
   return (
-    <div className="w-[1076px] h-[254px] justify-start items-start gap-8 inline-flex">
-      <div className="w-[245px] h-[254px] relative">
-        <div className="w-[245px] h-[254px] left-0 top-0 absolute bg-lime-300 rounded-2xl" />
+    <div className="w-[1076px] h-[340px] justify-start items-start gap-8 inline-flex">
+      <div className="w-[245px] h-[320px] relative">
+        <div className="w-[245px] h-[320px] left-0 top-0 absolute bg-lime-300 rounded-2xl" />
         <div className="w-[245px] h-[238px] left-0 top-0 absolute flex-col justify-start items-center gap-3 inline-flex">
-          <img className="w-[245px] h-[124px] rounded-2xl" src={image} />
+          <img className="w-[245px] h-[150px] rounded-2xl" src={image} />
           <div className="flex-col justify-start items-end gap-2 flex">
             <div className="w-[205px] text-black text-base font-semibold">
               {title}
