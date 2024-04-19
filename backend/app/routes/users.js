@@ -15,7 +15,7 @@ router.get("/", getItems);
 
 router.get("/:id", getItem);
 
-router.post("/", checkAuth, createItem);
+router.post("/", createItem);
 
 router.patch("/:id", updateItem);
 

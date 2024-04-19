@@ -1,12 +1,39 @@
 import { LoginRegisterCard } from "../components/layout/login-register-card";
 import { Topbar } from "../components/topbar";
+import axios from "axios";
+
+// function to login
+interface User {
+  email: string;
+  password: string;
+}
+
+const login = async (data: User) => {
+  try {
+    const response = await axios.post("http://localhost:3000/api/login", data);
+    return response.data;
+  } catch (error) {
+    console.error(error);
+  }
+};
 
 export const Login = () => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const target = e.target as typeof e.target & {
+      email: { value: string };
+      password: { value: string };
+    };
+    const email = target.email.value; // typechecks!
+    const password = target.password.value; // typechecks!
+    const data = { email, password };
+    await login(data);
+  };
   return (
     <>
       <Topbar />
       <div className="w-full h-full p-[64px] items-center justify-center flex">
-        <LoginRegisterCard isLogin={true} onSubmit={() => {}} />
+        <LoginRegisterCard isLogin={true} onSubmit={() => handleSubmit} />
       </div>
     </>
   );

@@ -23,6 +23,13 @@ const getItem = async (req, res) => {
 const createItem = async (req, res) => {
   try {
     const { name, email, password } = req.body;
+    // check email is already exist
+    const user = await userModel.findOne({ email });
+    if (user) {
+      return res.status(400).send({ message: "Email is already exist" });
+    }
+
+    // Create new user
     const response = await userModel.create({ name, email, password });
     res.send(response);
   } catch (error) {

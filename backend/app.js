@@ -8,9 +8,13 @@ const connectDB = require("./config/db");
 app.use(cors());
 app.use(express.json());
 
+// Load routes dynamically
 app.use("/api/1.0", require("./app/routes"));
 
+// Connect to mongo
 connectDB();
+
+// Start the server
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
