@@ -6,9 +6,7 @@ const {
   createItem,
   updateItem,
   deleteItem,
-  login,
 } = require("../controllers/users");
-const checkAuth = require("../middleware/auth");
 
 router.get("/", getItems);
 

@@ -1,10 +1,15 @@
+const jwt = require("jsonwebtoken");
+
 const checkAuth = (req, res, next) => {
   const token = req.headers.authorization.split(" ").pop();
-
-  if (token === "4312") {
+  try {
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    req.userData = decoded;
     next();
-  } else {
-    res.status(401).send("Unauthorized");
+  } catch (error) {
+    return res.status(401).json({
+      message: "Auth failed",
+    });
   }
 };
 
