@@ -1,6 +1,7 @@
 import { LoginRegisterCard } from "../components/layout/login-register-card";
 import { Topbar } from "../components/topbar";
 import axios from "axios";
+import toast from "react-hot-toast";
 
 // function to login
 interface User {
@@ -10,9 +11,14 @@ interface User {
 
 const login = async (data: User) => {
   try {
-    const response = await axios.post("http://localhost:3000/api/login", data);
+    const response = await axios.post(
+      "http://localhost:3000/api/users/login",
+      data
+    );
+    toast.success("Inicio de sesión correcto");
     return response.data;
   } catch (error) {
+    toast.error("Error al iniciar sesión");
     console.error(error);
   }
 };
@@ -33,7 +39,7 @@ export const Login = () => {
     <>
       <Topbar />
       <div className="w-full h-full p-[64px] items-center justify-center flex">
-        <LoginRegisterCard isLogin={true} onSubmit={() => handleSubmit} />
+        <LoginRegisterCard isLogin={true} onSubmit={handleSubmit} />
       </div>
     </>
   );

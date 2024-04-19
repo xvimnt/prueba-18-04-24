@@ -8,8 +8,6 @@ const {
   deleteItem,
 } = require("../controllers/likes");
 
-const Likes = require("../models/likes");
-
 router.get("/", getItems);
 
 router.get("/:id", getItem);

@@ -1,5 +1,7 @@
 const httpError = require("../helpers/handleError");
 const userModel = require("../models/users");
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 
 const getItems = async (req, res) => {
   try {
@@ -23,6 +25,10 @@ const getItem = async (req, res) => {
 const createItem = async (req, res) => {
   try {
     const { name, email, password } = req.body;
+
+    // Hash password before save
+    const hashedPassword = await bcrypt.hash(password, 10);
+
     // check email is already exist
     const user = await userModel.findOne({ email });
     if (user) {
@@ -30,7 +36,11 @@ const createItem = async (req, res) => {
     }
 
     // Create new user
-    const response = await userModel.create({ name, email, password });
+    const response = await userModel.create({
+      name,
+      email,
+      password: hashedPassword,
+    });
     res.send(response);
   } catch (error) {
     httpError(res, error);
