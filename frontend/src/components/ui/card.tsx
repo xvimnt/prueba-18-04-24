@@ -26,7 +26,7 @@ export const Card = ({
               {title}
             </div>
             <div className="w-[205px] text-black text-xs font-normal">
-              {description}
+              {description.split(" ").slice(0, 10).join(" ") + "..."}
             </div>
             <div className="justify-start items-start gap-2 inline-flex">
               <button
