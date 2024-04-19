@@ -12,7 +12,7 @@ interface User {
 const login = async (data: User) => {
   try {
     const response = await axios.post(
-      "http://localhost:3000/api/users/login",
+      `${import.meta.env.VITE_API_URL}/auth`,
       data
     );
     toast.success("Inicio de sesión correcto");
@@ -33,7 +33,11 @@ export const Login = () => {
     const email = target.email.value; // typechecks!
     const password = target.password.value; // typechecks!
     const data = { email, password };
-    await login(data);
+    const jwt = await login(data);
+    if (jwt) {
+      localStorage.setItem("jwt", jwt);
+      window.location.href = "/home";
+    }
   };
   return (
     <>
