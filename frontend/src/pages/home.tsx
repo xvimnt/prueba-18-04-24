@@ -7,13 +7,11 @@ import { useState, useEffect } from "react";
 const getNews = async () => {
   try {
     const jwt = localStorage.getItem("jwt")?.toString();
-    console.log(jwt);
     const response = await axios.get(`${import.meta.env.VITE_API_URL}/posts`, {
       headers: {
         Authorization: `Bearer ${jwt}`,
       },
     });
-    console.log(response.data);
     return response.data.results;
   } catch (error) {
     console.error(error);
@@ -34,11 +32,11 @@ export const Home = () => {
   return (
     <>
       <Topbar />
-      <div className="w-full h-full p-[64px] flex flex-col gap-4">
-        <span className="w-[352px] text-black text-2xl font-normal">
+      <div className="w-full h-full px-[12px] md:px-[64px] flex flex-col gap-4 items-center">
+        <span className="text-black text-2xl font-normal">
           Las ultimas del momento
         </span>
-        <div className="grid grid-cols-5 gap-2">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4">
           {news?.map((n) => (
             <Card
               title={n.title}
