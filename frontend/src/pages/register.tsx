@@ -63,7 +63,7 @@ export const Register = () => {
   return (
     <>
       <Topbar />
-      <div className="w-full h-full p-[64px] items-center justify-center flex">
+      <div className="w-full h-full md:p-[64px] p-[12px] items-center justify-center flex">
         <LoginRegisterCard onSubmit={handleSubmit} />
       </div>
     </>

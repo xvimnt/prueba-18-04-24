@@ -6,9 +6,9 @@ interface PropsI {
 export const LoginRegisterCard = ({ isLogin, onSubmit }: PropsI) => {
   return (
     <div>
-      <div className="w-fit h-fit bg-lime-300 rounded-2xl p-8">
+      <div className="w-full h-fit bg-lime-300 rounded-2xl md:p-8">
         <form
-          className="flex flex-col gap-4 items-center justify-center min-w-80"
+          className="flex flex-col gap-4 items-center justify-center md:min-w-80 w-full"
           onSubmit={onSubmit}
         >
           {/* name input */}
@@ -91,7 +91,7 @@ export const LoginRegisterCard = ({ isLogin, onSubmit }: PropsI) => {
           </div>
         </form>
       </div>
-      <div className="w-[352px] text-black text-base font-normal mt-4">
+      <div className="md:min-w-80 text-black text-base font-normal mt-4">
         Ingresa para no perderte lo mas importante del momento!
       </div>
     </div>
