@@ -16,6 +16,11 @@ const getItems = async (req, res) => {
 const getItem = async (req, res) => {
   try {
     const { id } = req.params;
+    const response = await fetch(
+      `https://newsdata.io/api/1/news?apikey=${process.env.NEWS_API_KEY}&id=${id}`
+    );
+    const data = await response.json();
+    res.send(data);
   } catch (error) {
     httpError(res, error);
   }

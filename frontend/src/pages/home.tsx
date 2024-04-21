@@ -42,7 +42,7 @@ export const Home = () => {
               title={n.title}
               description={n.description}
               image={n.image_url}
-              onView={() => navigate(`details/${n.article_id}`)}
+              onView={() => navigate(`/details/${n.article_id}`)}
             />
           ))}
         </div>
