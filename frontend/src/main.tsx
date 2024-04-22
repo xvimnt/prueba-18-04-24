@@ -33,8 +33,8 @@ const router = createBrowserRouter([
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
-  <React.StrictMode>
+  <>
     <Toaster />
     <RouterProvider router={router} />
-  </React.StrictMode>
+  </>
 );

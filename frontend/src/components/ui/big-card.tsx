@@ -5,7 +5,7 @@ interface PropsI {
   description: string;
   image_url: string;
   creator: string[];
-  liked: boolean;
+  likedState: boolean;
   pubDate: string;
   likes: number;
   onShare: () => void;
@@ -16,7 +16,7 @@ export const BigCard = ({
   description,
   image_url,
   likes,
-  liked,
+  likedState,
   pubDate,
   creator,
   onShare,
@@ -52,7 +52,7 @@ export const BigCard = ({
           <button
             onClick={onLike}
             className={`justify-center items-center gap-2.5 flex  w-[22px] h-[22px] rounded-full border border-black hover:bg-blue-200 ${
-              liked ?? "bg-blue-100"
+              likedState ?? "bg-blue-100"
             }`}
           >
             <Like className="w-3 h-3" />

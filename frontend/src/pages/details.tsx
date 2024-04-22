@@ -46,12 +46,14 @@ export const Details = () => {
   const { slug } = useParams();
 
   const [news, setNews] = useState([]);
+  const [liked, setLiked] = useState(false);
 
   useEffect(() => {
     const fetchNews = async () => {
       if (!slug) return;
       const news = await getIndividualNews(slug);
       setNews(news.results);
+      setLiked(news.liked);
     };
     fetchNews();
   }, [slug]);
@@ -68,8 +70,9 @@ export const Details = () => {
             <BigCard
               key={post.article_id}
               {...post}
+              likedState={liked}
               onLike={() => {
-                post.liked = !post.liked;
+                setLiked((prev) => !prev);
                 likeArticle(slug);
               }}
             />
@@ -80,7 +83,7 @@ export const Details = () => {
       <div className="md:px-[64px] px-[12px] space-y-4">
         <h2 className="text-xl font-semibold ]">Recomendados</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-4">
-          {post.recommended.map((n) => (
+          {post?.recommended.map((n) => (
             <Card
               key={n.article_id}
               title={n.title}
