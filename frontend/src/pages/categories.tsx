@@ -46,24 +46,26 @@ export const Categories = () => {
   return (
     <>
       <Topbar />
-      <div className="w-full h-full px-[12px] md:px-[64px] flex flex-row gap-16">
-        <Filters
-          categories={categories}
-          filter={filter}
-          setFilter={setFilter}
-        />
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-          {news?.map((n) => {
-            if (filter && n.category[0] !== filter) return null;
-            return (
-              <Card
-                title={n.title}
-                description={n.description}
-                image={n.image_url}
-                onView={() => navigate(`/details/${n.article_id}`)}
-              />
-            );
-          })}
+      <div className="flex items-center justify-center">
+        <div className="w-full h-full px-[12px] md:px-[64px] flex flex-col md:flex-row gap-16">
+          <Filters
+            categories={categories}
+            filter={filter}
+            setFilter={setFilter}
+          />
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+            {news?.map((n) => {
+              if (filter && n.category[0] !== filter) return null;
+              return (
+                <Card
+                  title={n.title}
+                  description={n.description}
+                  image={n.image_url}
+                  onView={() => navigate(`/details/${n.article_id}`)}
+                />
+              );
+            })}
+          </div>
         </div>
       </div>
     </>
