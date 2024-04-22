@@ -29,46 +29,19 @@ const getItem = async (req, res) => {
     const user_id = req.userData.id;
     const liked = await likeModel.findOne({ user_id, article_id: id });
     data.results[0].liked = liked ? true : false;
-    res.send(data);
-  } catch (error) {
-    httpError(res, error);
-  }
-};
 
-const getRecommendedNews = async (req, res) => {
-  try {
-    // get user likes
-    const user_id = req.userData.id;
-    const likes = (await likeModel.find({ user_id })).map(
-      (like) => like.article_id
+    // get recomended new based on the same category
+    const category = data.results[0].category;
+    const recommended = await fetch(
+      `https://newsdata.io/api/1/news?apikey=${process.env.NEWS_API_KEY}&category=${category}&q=guatemala`
     );
-
-    const response = await fetch(
-      `https://newsdata.io/api/1/news?apikey=${
-        process.env.NEWS_API_KEY
-      }&id=${likes.join(",")}`
+    const recommendedData = await recommended.json();
+    // remove the current article from recommended
+    recommendedData.results = recommendedData.results.filter(
+      (article) => article.id !== id
     );
+    data.results[0].recommended = recommendedData.results;
 
-    const data = await response.json();
-
-    // get the most liked categories
-    const categories = {};
-    likes.forEach((like) => {
-      if (!categories[like.category]) {
-        categories[like.category] = 0;
-      }
-      categories[like.category]++;
-    });
-
-    // get news
-    const recommended = [];
-    Object.keys(categories).forEach(async (category) => {
-      const response = await fetch(
-        `https://newsdata.io/api/1/news?apikey=${process.env.NEWS_API_KEY}&category=${category}`
-      );
-      const data = await response.json();
-      recommended.push(data.results[0]);
-    });
     res.send(data);
   } catch (error) {
     httpError(res, error);
@@ -78,5 +51,4 @@ const getRecommendedNews = async (req, res) => {
 module.exports = {
   getItem,
   getItems,
-  getRecommendedNews,
 };

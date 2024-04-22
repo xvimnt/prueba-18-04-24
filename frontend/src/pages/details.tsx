@@ -3,6 +3,7 @@ import { Topbar } from "../components/topbar";
 import { BigCard } from "../components/ui/big-card";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { Card } from "../components/ui/card";
 
 const getIndividualNews = async (slug: string) => {
   try {
@@ -56,22 +57,38 @@ export const Details = () => {
   }, [slug]);
 
   const hasItem = news && news.length > 0 && slug;
+  const post = news[0];
 
   return (
     <>
       <Topbar />
       <div className="container items-center justify-center w-full flex my-4">
-        {hasItem &&
-          news?.map((n) => (
+        {hasItem && (
+          <>
             <BigCard
-              key={n.article_id}
-              {...n}
+              key={post.article_id}
+              {...post}
               onLike={() => {
-                n.liked = !n.liked;
+                post.liked = !post.liked;
                 likeArticle(slug);
               }}
             />
+          </>
+        )}
+      </div>
+
+      <div className="md:px-[64px] px-[12px] space-y-4">
+        <h2 className="text-xl font-semibold ]">Recomendados</h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-4">
+          {post.recommended.map((n) => (
+            <Card
+              key={n.article_id}
+              title={n.title}
+              description={n.description}
+              image={n.image_url}
+            />
           ))}
+        </div>
       </div>
     </>
   );
