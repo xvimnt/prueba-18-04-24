@@ -38,7 +38,16 @@ const getItem = async (req, res) => {
     const recommendedData = await recommended.json();
     // remove the current article from recommended
     recommendedData.results = recommendedData.results.filter(
-      (article) => article.id !== id
+      (article) => article.article_id != id
+    );
+    // remove duplicates
+    recommendedData.results = recommendedData.results.filter(
+      (article, index, self) =>
+        index ===
+        self.findIndex(
+          (t) =>
+            t.title === article.title && t.description === article.description
+        )
     );
     data.results[0].recommended = recommendedData.results;
 

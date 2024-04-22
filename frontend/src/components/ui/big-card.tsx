@@ -44,12 +44,6 @@ export const BigCard = ({
         </div>
         <div className="justify-start items-start gap-2 inline-flex">
           <button
-            onClick={onShare}
-            className="justify-center items-center gap-2.5 flex  w-[22px] h-[22px] rounded-full border border-black hover:bg-blue-200"
-          >
-            <Share className="w-3 h-3" />
-          </button>
-          <button
             onClick={onLike}
             className={`justify-center items-center gap-2.5 flex  w-[22px] h-[22px] rounded-full border border-black hover:bg-blue-200 ${
               likedState ?? "bg-blue-100"

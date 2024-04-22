@@ -89,6 +89,7 @@ export const Details = () => {
               title={n.title}
               description={n.description}
               image={n.image_url}
+              onView={() => window.location.replace(`/details/${n.article_id}`)}
             />
           ))}
         </div>

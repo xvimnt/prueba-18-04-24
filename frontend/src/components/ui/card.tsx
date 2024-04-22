@@ -47,12 +47,6 @@ export const Card = ({
             >
               <Eyes className="w-3 h-3" />
             </button>
-            <button
-              onClick={onShare}
-              className="justify-center items-center gap-2.5 flex  w-[22px] h-[22px] rounded-full border border-black hover:bg-red-100"
-            >
-              <Share className="w-3 h-3" />
-            </button>
           </div>
         </div>
       </div>
