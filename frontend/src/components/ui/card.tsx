@@ -19,7 +19,7 @@ export const Card = ({
   const DESCRIPTION_MAX_LENGTH = 100;
   return (
     <div className="w-[245px] h-[320px] relative">
-      <div className="w-[245px] h-[320px] left-0 top-0 absolute bg-lime-300 rounded-2xl" />
+      <div className="w-[245px] h-[320px] left-0 top-0 absolute bg-[#ABFFE5] rounded-2xl" />
       <div className="w-[245px] h-[238px] left-0 top-0 absolute flex-col justify-start items-center gap-3 inline-flex">
         <img
           className="w-[245px] h-[150px] rounded-2xl"

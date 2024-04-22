@@ -6,7 +6,7 @@ interface PropsI {
 export const LoginRegisterCard = ({ isLogin, onSubmit }: PropsI) => {
   return (
     <div>
-      <div className="w-full h-fit bg-lime-300 rounded-2xl md:p-8">
+      <div className="w-full h-fit bg-[#ABFFE5] rounded-2xl md:p-8">
         <form
           className="flex flex-col gap-4 items-center justify-center md:min-w-80 w-full"
           onSubmit={onSubmit}

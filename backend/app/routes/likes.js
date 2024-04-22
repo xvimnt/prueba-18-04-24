@@ -8,11 +8,13 @@ const {
   deleteItem,
 } = require("../controllers/likes");
 
+const checkAuth = require("../middleware/auth");
+
 router.get("/", getItems);
 
 router.get("/:id", getItem);
 
-router.post("/", createItem);
+router.post("/", checkAuth, createItem);
 
 router.patch("/:id", updateItem);
 

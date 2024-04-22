@@ -6,6 +6,6 @@ const { getItem, getItems } = require("../controllers/posts");
 
 router.get("/", checkAuth, getItems);
 
-router.get("/:id", getItem);
+router.get("/:id", checkAuth, getItem);
 
 module.exports = router;

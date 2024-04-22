@@ -21,6 +21,26 @@ const getIndividualNews = async (slug: string) => {
   }
 };
 
+const likeArticle = async (slug: string) => {
+  try {
+    const jwt = localStorage.getItem("jwt")?.toString();
+    const article_id = slug;
+    const body = { article_id };
+    const response = await axios.post(
+      `${import.meta.env.VITE_API_URL}/likes`,
+      body,
+      {
+        headers: {
+          Authorization: `Bearer ${jwt}`,
+        },
+      }
+    );
+    return response.data;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
 export const Details = () => {
   const { slug } = useParams();
 
@@ -34,11 +54,24 @@ export const Details = () => {
     };
     fetchNews();
   }, [slug]);
+
+  const hasItem = news && news.length > 0 && slug;
+
   return (
     <>
       <Topbar />
-      <div className="container items-center justify-center w-full flex mt-12">
-        {news && news?.map((n) => <BigCard {...n} />)}
+      <div className="container items-center justify-center w-full flex my-4">
+        {hasItem &&
+          news?.map((n) => (
+            <BigCard
+              key={n.article_id}
+              {...n}
+              onLike={() => {
+                n.liked = !n.liked;
+                likeArticle(slug);
+              }}
+            />
+          ))}
       </div>
     </>
   );

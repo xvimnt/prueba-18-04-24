@@ -22,9 +22,20 @@ const getItem = async (req, res) => {
 
 const createItem = async (req, res) => {
   try {
-    const { user_id, post_id } = req.body;
-    const response = await likeModel.create({ user_id, post_id });
-    res.send(response);
+    const user_id = req.userData.id;
+    const { article_id } = req.body;
+
+    // verify if user already liked the article
+    const liked = await likeModel.findOne({ user_id, article_id });
+    if (liked) {
+      // delete the like
+      await likeModel.findByIdAndDelete(liked._id);
+      return res.send({ message: "like deleted" });
+    }
+
+    // create like
+    await likeModel.create({ user_id, article_id });
+    res.send({ message: "like created", user_id, article_id });
   } catch (error) {
     httpError(res, error);
   }
@@ -33,10 +44,10 @@ const createItem = async (req, res) => {
 const updateItem = async (req, res) => {
   try {
     const { id } = req.params;
-    const { user_id, post_id } = req.body;
+    const { user_id, article_id } = req.body;
     const response = await likeModel.findByIdAndUpdate(id, {
       user_id,
-      post_id,
+      article_id,
     });
     res.send(response);
   } catch (error) {

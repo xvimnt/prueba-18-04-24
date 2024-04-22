@@ -3,12 +3,12 @@ import { Logo } from "./icons";
 export const Topbar = () => {
   return (
     <div className="w-full h-[111px]">
-      <div className="w-full h-[78px]  bg-lime-300 justify-between items-center inline-flex md:px-[64px] px-[12px]">
+      <div className="w-full h-[78px]  bg-[#ABFFE5] justify-between items-center inline-flex md:px-[64px] px-[12px]">
         <div className="gap-4 flex items-center justify-center">
           <a href="/home">
             <Logo className="md:w-[78px] w-10 h-[78px]" />
           </a>
-          <div className="text-red-600 md:text-2xl font-normal ">
+          <div className="text-[#6C48FF] md:text-2xl font-normal ">
             Conociendo mas!
           </div>
         </div>
